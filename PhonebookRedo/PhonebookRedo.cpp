@@ -157,7 +157,16 @@ void PhonebookList::readList()
 //create duplicate check for additional entries to not add to phone book
 void PhonebookList::checkList()
 {
-	//TBD
+	ifstream infile(filename);
+	for (int i = 1; i <= (entryCount - 1); i++)
+	{
+		if (strcmp(mylist[entryCount - 1]->fullName, mylist[(entryCount - 1) - i]->fullName) == 0)
+		{
+			cout << "Entry Already Added!!!\nNot Added to Phonebook" << endl;
+			entryCount--;
+		}
+	}
+	return;
 }
 
 int main()
@@ -214,7 +223,7 @@ int main()
 		pbList->addToList(myPB);
 
 		//check entries for duplicates
-		//pbList->checkList();
+		pbList->checkList();
 
 		cout << "Another Entry? - Enter Y to Add; Any other key to view current Entries" << endl;
 		cin >> answer;
